@@ -2,7 +2,7 @@
 
 const Footer = ()=>{
     return(
-        <footer><p>testando...</p></footer>
+        <footer><p>Ano: { new Date().getFullYear()}</p></footer>
     )
 }
 

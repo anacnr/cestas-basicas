@@ -1,4 +1,5 @@
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer/footer";
+
 
 //Criação dos componentes para a parecer na página principal
 export default function Home(){
