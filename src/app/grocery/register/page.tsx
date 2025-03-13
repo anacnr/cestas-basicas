@@ -1,16 +1,17 @@
-//Cria função da página de cadastro do supermercado
+//Formulário para cadastrar o supermercado
 
-const register = () =>{
-    return (
+const GroceyRegister = () =>{
+    console.log("Pág.");
+    
+    return(
         <div>
-            <h1>Tela de cadastro</h1>
-            <form action="#" method="post" encType="multitype/image" >
-                <label htmlFor="img-register">Cadastre sua imagem</label>
-                <input type="file" src="#" alt="Cadastro da imagem" id="img-register" accept="image/*"/>
-                <button type="submit">Enviar</button>
-        </form>
+            <form>      
+                <label htmlFor="input-t">Coloque seu nome:</label>
+                <input type="text" id="input-t"/>
+                <input type="submit" value="Salvar" />
+            </form>
         </div>
     )
 }
 
-export default register
+export default GroceyRegister
