@@ -1,0 +1,70 @@
+/*
+connection.connect((err : any)=>{
+       try{
+         console.log("conexao feita!")
+       }
+       catch{
+        console.log("ERRO: " , err);
+       }
+})*/
+
+connection.query('SELECT name FROM person' , (err : any, row : RowProps)=>{
+        if(!err){
+            console.log("primeiro nome: " , row.name);
+        }
+        else{
+            console.log("deu erro ué" , err);    
+        }
+})
+
+api.get('/test', (req , res ) => {//Precisa passar os parametros nesta ordem
+    res.send({
+     "msg" : "teste"   
+    })
+})
+
+_______________________________________________________________________________________________________________________________________________________________________________________________________________
+
+EXIBIÇÃO DOS DADOS GRAVADOS
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exibir nomes</title>
+</head>
+<body>
+  <h1>Nomes da tabela person</h1>
+  <p id="resultado"></p>
+  <script>
+   //pega a url onde está os dados | response.json()-> Transforma a informação bruta pra objeto
+   fetch('http://localhost:3000/name').then(response => response.json()).then(info =>{
+    const name = info.map(person => person.name)
+    document.querySelector('#resultado').textContent = name
+    console.log(name);
+    
+   }).catch(err =>{
+        const name = document.querySelector("#resultado").textContent = 'Ocorreu um erro!'
+        console.log("Erro: " , err); 
+   })
+  </script>
+</body>
+</html>
+
+Para exibir no navegador as informações do metodo get : http://localhost:3000/name
+
+/*
+api.get("/name", (req, res)=>{
+    connection.query("SELECT * FROM person", (err, row)=>{
+        if(!err){
+            res.json(row)
+        }
+        else{
+            res.status(500).json({err : `Erro ao exibir informações. ${err}`})
+        }
+    })
+})*/
+
+Declaração do valor com TS: let new_name = document.querySelector<HTMLInputElement>('#new_name')?.value
+
+"moduleResolution": "node10", -> linha 30 em tsconfig.json

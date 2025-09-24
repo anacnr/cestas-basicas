@@ -1,0 +1,19 @@
+npm init -y
+npm install typescript --save-dev
+tsc --init
+
+npm install tsx
+npm install @types/node --save-dev
+
+npm i --save-dev @types/express -> Estava reclamando da tipagem do express
+npm install nodemon
+
+Coloquei "dev" : "nodemon ./src/route/index.ts" no arquivo package.json em scripts na linha 8 Diretório raiz.
+
+Rodar o servidor local com npm run dev 
+npm install --save-dev nodemon ->roda automaticamente
+
+npm instal --save-dev mysql2
+
+npm install cors
+npm i --save-dev @types/cors
