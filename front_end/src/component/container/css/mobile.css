@@ -1,0 +1,11 @@
+@charset "UTF-08";
+
+:root{
+    --background_bg : rgba(255, 255, 255, 0.781);
+}
+
+@media(max-width:600px){
+    .form_div{
+        background-color: var(--background_bg); margin: auto; display: block; width: 100%; height: 100%;
+    }
+}

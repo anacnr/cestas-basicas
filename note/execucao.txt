@@ -1,1 +1,9 @@
-Abrir o navegador e por: http://localhost/compras-basicas/front_end/
+Abrir o navegador e por: 
+http://localhost/compras-basicas/front_end/
+http://localhost/compras-basicas/back_end/
+
+
+Rodar no terminal npx tsx watch src/route/index.ts para que o terminal atualize sozinho
+Está o servidor local do node
+
+Roda primeiro o frontend para salvar os dados no backend

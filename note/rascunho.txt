@@ -1,30 +1,3 @@
-/*
-connection.connect((err : any)=>{
-       try{
-         console.log("conexao feita!")
-       }
-       catch{
-        console.log("ERRO: " , err);
-       }
-})*/
-
-connection.query('SELECT name FROM person' , (err : any, row : RowProps)=>{
-        if(!err){
-            console.log("primeiro nome: " , row.name);
-        }
-        else{
-            console.log("deu erro ué" , err);    
-        }
-})
-
-api.get('/test', (req , res ) => {//Precisa passar os parametros nesta ordem
-    res.send({
-     "msg" : "teste"   
-    })
-})
-
-_______________________________________________________________________________________________________________________________________________________________________________________________________________
-
 EXIBIÇÃO DOS DADOS GRAVADOS
 <!-- index.html -->
 <!DOCTYPE html>
@@ -68,3 +41,61 @@ api.get("/name", (req, res)=>{
 Declaração do valor com TS: let new_name = document.querySelector<HTMLInputElement>('#new_name')?.value
 
 "moduleResolution": "node10", -> linha 30 em tsconfig.json
+
+*****
+src/index.tsx
+import express  from "express" //Auxilia nos métodos e rotas
+import mysql from 'mysql2' //Instancia do banco
+import cors from 'cors' //Opera com o navegador
+import RegisterRouter from "./register";//Importa o método post
+
+const api = express();
+//Faz o navegador aceitar a solicitação
+api.use(cors())
+//Middlewares
+api.use(express.urlencoded({extended:true}))
+api.use(express.json())
+
+api.use("/" , RegisterRouter)
+
+api.listen(3000, ()=>{console.log("Porta aberta");
+})
+
+export const connection = mysql.createConnection({
+    host : 'localhost', user : 'root', password : "" , database : 'test'
+})
+
+connection.connect((err)=>{
+    if(!err){
+        console.log("Conexxão OK");
+    } else{
+        console.log("Conexão BAD " , err);//Funcionou! Emitiu um objeto de erros
+    }
+})
+
+src/register/
+import { Router, Request, Response } from "express";
+import { connection } from "../index";
+
+const RegisterRouter = Router()
+
+RegisterRouter.post("/register", (req: Request, res: Response) => {
+
+  const myname = req.body.myname; 
+
+  const insert = `INSERT INTO person (name) VALUES (?)`;
+  
+  connection.query(insert, [myname], (err) => {
+
+    if (!err) {
+      res.send("Cadastrou!");
+    } else {
+      console.error("Erro ao inserir no banco:", err);
+      res.status(500).send("Erro no servidor.");
+    }
+  });
+});
+
+export default RegisterRouter
+
+Parametros: http://localhost:3000/edit?id=${item.id}&name=${item.name}

@@ -1,0 +1,10 @@
+Banco de dados - supermarket
+
+Referencia da priamry key da tabela register_supermarket :
+
+create table supermlogin(
+	id_supermarket int not null,
+	logged_in date default current_time,
+	foreign key (id_supermarket) references register_supermarket(id)
+);
+

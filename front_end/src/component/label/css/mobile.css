@@ -1,0 +1,7 @@
+@charset "UTF-08";
+
+@media (max-width:600px) {
+    label{
+        color: blue; letter-spacing: 2px;
+    }
+}

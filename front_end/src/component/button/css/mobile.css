@@ -1,0 +1,7 @@
+@charset "UTF-08";
+
+@media (max-width:600px){
+    button{
+        width: 24px; padding: 3px;
+    }
+}

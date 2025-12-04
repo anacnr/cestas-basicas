@@ -1,0 +1,7 @@
+@charset "UTF-08";
+
+@media (max-width:600px){
+    input{
+        padding: 2px; width: 50%; margin-top: 10px;
+    }
+}
