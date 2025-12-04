@@ -66,7 +66,7 @@ const FormSubmit =  async (e : FormEvent) =>{
             <Container> 
             <Form onSubmit={FormSubmit}>
 
-                <label htmlFor="image_id" id='image'> <FiUpload/> </label>
+                <label htmlFor="image_id" id='image_label'> <FiUpload id='image_icon'/> </label>
                 <Input id='image_id' type='file' accept='image/*' name='image' value={dates?.photo} 
                 onChange={(e)=> setDates({...dates, photo: e.target.value})} />
 
