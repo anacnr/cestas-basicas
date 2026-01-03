@@ -17,3 +17,9 @@ npm instal --save-dev mysql2
 
 npm install cors
 npm i --save-dev @types/cors
+
+Mascára com auto-formatação
+npm install react-number-format
+chama: 
+import { PatternFormat } from "react-number-format";
+<PatternFormat format="##.###.###/####-##" mask="_" />

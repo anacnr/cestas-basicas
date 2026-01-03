@@ -10,7 +10,7 @@ import { route_edit_superm } from "./supermarket/edit";
 
 const port = express();
 
-port.use(cors())
+port.use(cors());
 
 port.listen(3000 , ()=>{
     console.log("Porta está sendo executada");
