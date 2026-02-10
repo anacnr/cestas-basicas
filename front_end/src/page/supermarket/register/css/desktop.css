@@ -2,11 +2,8 @@
 
 *{ margin: 0; padding: 0; box-sizing: border-box;}
 
-body{
-    background-image: linear-gradient(to bottom, #FF4133, #FFC24A); background-attachment: fixed;
-}
 
-@media (max-width:600px){
+@media (min-width:600px) and (max-width:728px){
     #image_id{
     display: none;
     }

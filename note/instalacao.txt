@@ -23,3 +23,4 @@ npm install react-number-format
 chama: 
 import { PatternFormat } from "react-number-format";
 <PatternFormat format="##.###.###/####-##" mask="_" />
+npm i --save-dev @types/bcrypt

@@ -1,13 +1,14 @@
-import React, { useState, type FormEvent } from 'react'
+import React, { useState, type FormEvent} from 'react'
 
 import { Container } from '../../../component/container'
 import { H1 } from '../../../component/h1'
 import './css/mobile.css'
+import './css/desktop.css'
 import { Form } from '../../../component/form'
 import { Input } from '../../../component/input'
 import { Button } from '../../../component/button'
 
-import { FiUpload } from "react-icons/fi";
+import { FiUpload, FiEye, FiEyeOff } from "react-icons/fi";
 import { PatternFormat } from 'react-number-format'
 
 const Register = () =>{
@@ -51,9 +52,12 @@ const FormSubmit =  async (e : FormEvent) =>{
            } )
 
            const resText = await result.text();//Emite a mensagem do res.send lá do back-end
-           console.log("Cadastro realizado! " , resText);
-           console.log("Foto no front: " , dates.photo );
-           
+           if(resText === "cnpj-ou-pj-invalido"){
+            console.log("CNPJ OU PJ Inválido!");
+           }
+           else{
+            console.log("Cadastro realizado! " , resText); 
+           }
         } catch (error) {
             console.log("ERRO: " , error);
         }
@@ -62,7 +66,6 @@ const FormSubmit =  async (e : FormEvent) =>{
         alert("Campo vazio!")
     }
 }
-
     const uploadImg = ( perfil : React.ChangeEvent<HTMLInputElement> )=>{
 
         let file_info = perfil.target.files?.[0];
@@ -74,10 +77,13 @@ const FormSubmit =  async (e : FormEvent) =>{
         let label_img = document.querySelector<HTMLLabelElement>('#image_label')
 
         if(label_img){
-            label_img.style.backgroundImage = `url(${temporary_url})`
+            label_img.style.backgroundImage = `url(${temporary_url})`//Li em um comentário sobre esta dica
             label_img.style.backgroundSize = 'contain'
         }
-        console.log("uploadImg: " , file_info);
+        let sendArow = document.getElementById("image_icon")
+        if(sendArow){
+            sendArow.style.opacity = '0.5'
+        }
 
         const modified_name = crypto.randomUUID().toLocaleLowerCase()
         const extension_name = file_info.type.split('/').pop()
@@ -101,26 +107,23 @@ const FormSubmit =  async (e : FormEvent) =>{
                 <Input id='manager_id' type='text'name='manager' placeholder='Gerente' value={dates?.manager} 
                 onChange={(e)=> setDates({...dates, manager: e.target.value})} />
 
-                <PatternFormat format='##.###.###/####-##' mask="_" name='cnpj_pj' placeholder='CNPJ/PJ' value={dates?.cnpj_pj} onChange={(e)=> setDates({...dates, cnpj_pj : e.target.value})} />
+                <PatternFormat format='##.###.###/####-##' mask="_" name='cnpj_pj' placeholder='CNPJ/PJ' value={dates?.cnpj_pj}  
+                onValueChange={(e) =>{ setDates({...dates, cnpj_pj : e.formattedValue});
+                 }} />
+                {/*e.formattedValue = Remove os caracteres*/}
                
                 <Input id='address_id' type='text'name='address' placeholder='Endereço' value={dates?.address} 
                 onChange={(e)=> setDates({...dates, address: e.target.value})} />
 
-                 
-                <Input id='fix-tel_id' type='text'name='fix_tel' placeholder='Telefone-fixo' value={dates?.fix_tel} 
-                onChange={(e)=> setDates({...dates, fix_tel: e.target.value})} />
+                 <PatternFormat format='(##) #### - ####' mask=" " name='fix_tel' placeholder='Telefone-fixo' value={dates?.fix_tel} onValueChange={ (e) => setDates({...dates, fix_tel : e.formattedValue})} />
 
-                
-                <Input id='mobile-tel_id' type='text'name='mobile_tel' placeholder='Telefone móvel' value={dates?.mobile_tel} 
-                onChange={(e)=> setDates({...dates, mobile_tel: e.target.value})} />
-
+                <PatternFormat format='(##) 9#### - ####' mask=" " name='mobile_tel' placeholder='Telefone móvel' value={dates?.mobile_tel} onValueChange={ (e) => setDates({...dates, mobile_tel : e.formattedValue})} />
             
                 <Input id='email_id' type='text'name='email' placeholder='E-mail' value={dates?.email} 
                 onChange={(e)=> setDates({...dates, email: e.target.value})} />
-
                 
-                <Input id='passw_id' type='text'name='password_hash' placeholder='Senha' value={dates?.password_hash} 
-                onChange={(e)=> setDates({...dates, password_hash: e.target.value})} />
+                <Input id='passw_id' type='text'name='password_hash' placeholder='Senha' value={dates?.password_hash} onChange={(e)=> setDates({...dates, password_hash: e.target.value})} />
+               
 
                 <Button type='submit'>Enviar</Button>
             </Form>
